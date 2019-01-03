@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/mypage.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -54,6 +55,15 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('mypage') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('mypage-form').submit();">
+                                        {{ __('マイページ') }}
+                                    </a>
+
+                                    <form id="mypage-form" action="{{ route('mypage') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
