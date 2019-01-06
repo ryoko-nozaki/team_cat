@@ -14,11 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/book/{bookId?}', 'BookDetailsInfoController@index');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/book/{bookId?}', 'BookDetailsInfoController@index')->name('book');
+Route::post('/book/createReview', 'BookDetailsInfoController@createReview');
+Route::post('/book/removeReview', 'BookDetailsInfoController@removeReview');
 
 Auth::routes();
 
