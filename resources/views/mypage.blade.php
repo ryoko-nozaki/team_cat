@@ -9,11 +9,11 @@
 					<a class="nav-link" href="#">書籍登録</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">貸出許可</a>
+					<a class="nav-link" href="{{ route('loan') }}">貸出許可</a>
 				</li>
 			</ul>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-9">
 			<div class="alert alert-secondary" role="alert">
 				<strong>お知らせ</strong></br>書籍を貸し出しました。
 			</div>

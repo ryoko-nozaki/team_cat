@@ -18,5 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/mypage', 'mypageController@index')->name('mypage');
-Route::post('/mypage', 'mypageController@index')->name('mypage');
+Route::get('/mypage', 'MypageController@index')->name('mypage');
+Route::post('/mypage', 'MypageController@index')->name('mypage');
+Route::get('/loan', 'LoanController@index')->name('loan');
+Route::post('/loan', 'LoanController@index')->name('loan');
