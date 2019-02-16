@@ -1,0 +1,11 @@
+.col-md-4.odd{
+  background-color: #fffce8;
+}
+
+.col-md-4.even{
+  background-color: #f7f6f1;
+}
+
+.col-md-4 img{
+  height: 200px;
+}

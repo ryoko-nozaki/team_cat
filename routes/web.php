@@ -20,3 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mypage', 'mypageController@index')->name('mypage');
 Route::post('/mypage', 'mypageController@index')->name('mypage');
+
+Route::get('search', 'SearchController@index');//->middleware('auth');
+Route::post('search', 'SearchController@post');//->middleware('auth');
