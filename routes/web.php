@@ -11,9 +11,9 @@
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
@@ -21,4 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mypage', 'mypageController@index')->name('mypage');
 Route::post('/mypage', 'mypageController@index')->name('mypage');
 
-Route::get('search', 'SearchController@index'); //->middleware('auth');
+Route::get('/', 'SearchController@index')->middleware('auth');
+Route::get('search', 'SearchController@index')->middleware('auth');
