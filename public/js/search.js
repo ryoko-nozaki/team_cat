@@ -8,4 +8,6 @@ $(function() {
         $(this).addClass("odd");
       }
     });
+
+  $(".pager").addClass("mx-5 mt-5");
 });

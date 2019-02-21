@@ -16,9 +16,9 @@
     @foreach($books as $book)
         <div class="col-4 pt-4">
             @if($book->thumbnail)
-                <img class="mx-auto d-block img-fluid" src="{{ $book->thumbnail }}" />
+                <img class="mx-auto d-block" src="{{ $book->thumbnail }}" />
             @else
-                <img class="mx-auto d-block img-fluid" src="/img/no_img.png" />
+                <img class="mx-auto d-block" src="/img/no_img.png" />
             @endif
 
             <div class="mt-5">タイトル：{{ $book->title }}</div>
@@ -32,7 +32,7 @@
     @endforeach
     </div>
 
-    <div class="mx-5 mt-5">
+    <div class="pager">
         {{ $books->links() }}
     </div>
 </div>
