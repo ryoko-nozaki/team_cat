@@ -14,5 +14,10 @@ class Books extends Model
         return $this->hasMany('App\BookOwner', 'book_id');
 
     }
+    public function loan() {
+
+        return $this->hasMany('App\Loan', 'book_id');
+
+    }
 
 }
