@@ -35,26 +35,15 @@ class LoanController extends Controller
                ->select('loan.*', 'books.title as title', 'users.name as borrower_name', 'book_owner.loan_status')
                ->leftjoin('books','loan.book_id','=','books.id')
                ->leftjoin('users','loan.borrower_id','=','users.id')
-               ->leftjoin('book_owner','loan.owner_id','=','book_owner.owner_id')
+               // ->leftjoin('book_owner','loan.owner_id','=','book_owner.owner_id')
+               ->leftjoin('book_owner',function($join){
+                 $join->on('loan.owner_id','=','book_owner.owner_id')
+                 ->where('book_owner.book_id', '=', 'books.id');
+               })
                ->where('loan.owner_id', $user['id'])
                ->orderBy('loan.id')
                ->get();
         $loan = json_decode(json_encode($loan), true);
-        /*
-        select `loan`.*, `books`.`title` as `title`, `users`.`name` as `borrower_name`, `book_owner`.`loan_status` 
-        from `loan` left join `books` on `loan`.`book_id` = `books`.`id` 
-          left join `users` on `loan`.`borrower_id` = `users`.`id` 
-          left join `book_owner` on `loan`.`owner_id` = `book_owner`.`owner_id` 
-        where `loan`.`owner_id` = 2 
-        order by `loan`.`id` asc\G
-        */
-
-/*
-        $owner = \DB::table('book_owner')
-               ->where('owner_id', $user['id'])
-               ->get();
-        $owner = json_decode(json_encode($owner), true);
-*/
 
         foreach($loan as $key => $val)
         {
@@ -67,13 +56,3 @@ class LoanController extends Controller
         return view('loan', $data);
     }
 }
-/*
-
-array(4) { 
-	[0]=> array(11) { ["id"]=> int(1) ["borrower_id"]=> int(1) ["owner_id"]=> int(2) ["book_id"]=> int(5) 
-	["loan_date"]=> string(19) "2019-02-07 00:00:00" ["return_date"]=> string(19) "2019-02-20 00:00:00" ["updated_at"]=> string(19) "2019-02-09 06:45:58" ["created_at"]=> string(19) "2019-02-09 06:45:58" 
-	["title"]=> string(20) "testtesttesttesttest" ["borrower_name"]=> string(9) "テスト" ["loan_status"]=> int(0) 
-	} 
-	[1]=> array(11) { ["id"]=> int(1) ["borrower_id"]=> int(1) ["owner_id"]=> int(2) ["book_id"]=> int(5) ["loan_date"]=> string(19) "2019-02-07 00:00:00" ["return_date"]=> string(19) "2019-02-20 00:00:00" ["updated_at"]=> string(19) "2019-02-09 06:45:58" ["created_at"]=> string(19) "2019-02-09 06:45:58" ["title"]=> string(20) "testtesttesttesttest" ["borrower_name"]=> string(9) "テスト" ["loan_status"]=> int(0) } [2]=> array(11) { ["id"]=> int(3) ["borrower_id"]=> int(1) ["owner_id"]=> int(2) ["book_id"]=> int(1) ["loan_date"]=> string(19) "2019-02-07 00:00:00" ["return_date"]=> string(19) "2019-02-20 00:00:00" ["updated_at"]=> string(19) "2019-02-09 06:49:39" ["created_at"]=> string(19) "2019-02-09 06:49:39" ["title"]=> string(11) "PHP Laravel" ["borrower_name"]=> string(9) "テスト" ["loan_status"]=> int(0) } [3]=> array(11) { ["id"]=> int(3) ["borrower_id"]=> int(1) ["owner_id"]=> int(2) ["book_id"]=> int(1) ["loan_date"]=> string(19) "2019-02-07 00:00:00" ["return_date"]=> string(19) "2019-02-20 00:00:00" ["updated_at"]=> string(19) "2019-02-09 06:49:39" ["created_at"]=> string(19) "2019-02-09 06:49:39" ["title"]=> string(11) "PHP Laravel" ["borrower_name"]=> string(9) "テスト" ["loan_status"]=> int(0) } }
-
-*/
