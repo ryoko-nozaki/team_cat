@@ -42,22 +42,42 @@
 						</tr>
 					</thead>
 					<tbody>
-					@foreach($loan as $key => $var)
+					@foreach($loan as $key => $val)
 						<tr>
 							<td>
-								{{$key}}
+								{{$val['title']}}
 							</td>
 							<td>
-								{{$var}}
+								{{$val['borrower_name']}}
 							</td>
 							<td>
-								01/04/2012
+								{{$val['loan_date']}}～{{$val['return_date']}}
 							</td>
 							<td>
-								Default
+								<form action="" method="post">
+									@if($val['loan_status'] == 0)
+										<input type="radio" name="loan_status" value="2" id="ok">OK</input>
+										<input type="radio" name="loan_status" value="3" id="ng">NG</input>
+									@elseif($val['loan_status'] == 1)
+										<input type="radio" name="loan_status" value="2" id="ok" disabled="disabled">OK</input>
+										<input type="radio" name="loan_status" value="3" id="ng" disabled="disabled">NG</input>
+									@elseif($val['loan_status'] == 2)
+										<input type="radio" name="loan_status" value="2" id="ok" checked="checked">OK</input>
+										<input type="radio" name="loan_status" value="3" id="ng">NG</input>
+									@elseif($val['loan_status'] == 3)
+										<input type="radio" name="loan_status" value="2" id="ok">OK</input>
+										<input type="radio" name="loan_status" value="3" id="ng" checked="checked">NG</input>
+									@endif
+								</form>
 							</td>
 							<td>
-								Default
+								<form action="" method="post">
+									@if($val['loan_status'] == 0 || $val['loan_status'] == 3)
+										返却済
+									@elseif($val['loan_status'] == 1 || $val['loan_status'] == 2)
+										貸出中
+									@endif
+								</form>
 							</td>
 						</tr>
 					@endforeach

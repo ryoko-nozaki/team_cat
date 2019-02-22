@@ -11,7 +11,7 @@ class BookOwner extends Model
     
     public function books() {
 
-        return $this->belongsTo('App\Books', 'id');
+        return $this->belongsTo('App\Books', 'book_id');
 
     }
 }
