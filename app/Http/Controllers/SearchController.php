@@ -3,21 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Books;
 
 class SearchController extends Controller
 {
+    private $pagination_number = 9;
+
     public function index(Request $request)
     {
         $q = $request->input('q');
         if (isset($q)) {
-            $books = DB::table('books')
+            $books = (new Books())
                 ->where('title', 'like', '%' . $q . '%')
                 ->orWhere('author', 'like', '%' . $q . '%')
                 ->orderBy('updated_at', 'desc')
-                ->paginate(9);
+                ->paginate($this->pagination_number);
         } else {
-            $books = DB::table('books')->orderBy('updated_at', 'desc')->paginate(9);
+            $books = Books::orderBy('updated_at', 'desc')->paginate($this->pagination_number);
         }
         return view('search')->with('books', $books);
     }
