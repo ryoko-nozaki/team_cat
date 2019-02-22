@@ -54,19 +54,43 @@
 								{{$val['loan_date']}}～{{$val['return_date']}}
 							</td>
 							<td>
-								<form action="" method="post">
+								<form action="{{ url('/loan/add')}}" method="post">
 									@if($val['loan_status'] == 0)
-										<input type="radio" name="loan_status" value="2" id="ok">OK</input>
-										<input type="radio" name="loan_status" value="3" id="ng">NG</input>
+										<div class="btn-group btn-group-sm" role="group">
+											<button class="btn btn-secondary" type="submit" value="2" id="ok" name="loan_status">
+												OK
+											</button>
+											<button class="btn btn-secondary" type="submit" value="3" id="ng" name="loan_status">
+												NG
+											</button>
+										</div>
 									@elseif($val['loan_status'] == 1)
-										<input type="radio" name="loan_status" value="2" id="ok" disabled="disabled">OK</input>
-										<input type="radio" name="loan_status" value="3" id="ng" disabled="disabled">NG</input>
+										<div class="btn-group btn-group-sm" role="group">
+											<button class="btn btn-secondary" type="submit" value="2" id="ok" name="loan_status"  disabled="disabled">
+												OK
+											</button>
+											<button class="btn btn-secondary" type="submit" value="3" id="ng" name="loan_status" disabled="disabled">
+												NG
+											</button>
+										</div>
 									@elseif($val['loan_status'] == 2)
-										<input type="radio" name="loan_status" value="2" id="ok" checked="checked">OK</input>
-										<input type="radio" name="loan_status" value="3" id="ng">NG</input>
+										<div class="btn-group btn-group-sm" role="group">
+											<button class="btn btn-secondary active" type="submit" value="2" id="ok" name="loan_status">
+												OK
+											</button>
+											<button class="btn btn-secondary" type="submit" value="3" id="ng" name="loan_status">
+												NG
+											</button>
+										</div>
 									@elseif($val['loan_status'] == 3)
-										<input type="radio" name="loan_status" value="2" id="ok">OK</input>
-										<input type="radio" name="loan_status" value="3" id="ng" checked="checked">NG</input>
+										<div class="btn-group btn-group-sm" role="group">
+											<button class="btn btn-secondary" type="submit" value="2" id="ok" name="loan_status">
+												OK
+											</button>
+											<button class="btn btn-secondary active" type="submit" value="3" id="ng" name="loan_status">
+												NG
+											</button>
+										</div>
 									@endif
 								</form>
 							</td>
