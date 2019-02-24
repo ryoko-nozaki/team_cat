@@ -10,7 +10,8 @@ use App\BookReview;
 
 class BookDetailsInfoController extends Controller
 {
-    public function index($bookId=null) {
+    public function index($bookId = null)
+    {
         $userId = Auth::id();
         $book = Book::find($bookId);
         $owners = BookOwner::where('book_id', $bookId)->get();
@@ -21,7 +22,7 @@ class BookDetailsInfoController extends Controller
             'owners'  => $owners,
             'reviews' => $reviews
         ];
-        return view('bookDetailsInfo.index', $param);
+        return view('book_details_info.index', $param);
     }
 
     public function createReview(Request $request)

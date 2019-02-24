@@ -12,6 +12,7 @@ class BookOwner extends Model
      * @var string
      */
     protected $table = 'book_owner';
+    protected $guarded = array('id');
 
     public function user()
     {

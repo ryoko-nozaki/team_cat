@@ -17,6 +17,9 @@ Route::get('/', function () {
 Route::get('/book/{bookId?}', 'BookDetailsInfoController@index')->name('book');
 Route::post('/book/createReview', 'BookDetailsInfoController@createReview');
 Route::post('/book/removeReview', 'BookDetailsInfoController@removeReview');
+Route::get('/bookRegist', 'BookRegistrationController@show');
+Route::post('/bookRegist', 'BookRegistrationController@create')->name('bookRegist');
+
 
 Auth::routes();
 
