@@ -28,6 +28,8 @@
             @else
                 <div>著者が見つかりませんでした</div>
             @endif
+
+            <div>冊数：{{ $book->countLendableBook() }}/{{ $book->countAllBook() }}冊</div>
         </div>
     @endforeach
     </div>
