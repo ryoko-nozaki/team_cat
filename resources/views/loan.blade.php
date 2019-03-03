@@ -54,52 +54,52 @@
 								{{$val['loan_date']}}～{{$val['return_date']}}
 							</td>
 							<td>
-								<form action="{{ url('/loan/add')}}" method="post">
-									@if($val['loan_status'] == 0)
-										<div class="btn-group btn-group-sm" role="group">
-											<button class="btn btn-secondary" type="submit" value="2" id="ok" name="loan_status">
+								<div class="btn-group btn-group-sm" role="group">
+									<form action="/loan" method="post">
+										<input type="hidden" value="{{$val['book_owner_id']}}" id="book_owner_id" name="book_owner_id">
+										{{ csrf_field() }}
+										@if($val['loan_status'] == 0)
+											<button class="btn btn-secondary" type="submit" value="2" id="loan_status" name="loan_status">
 												OK
 											</button>
-											<button class="btn btn-secondary" type="submit" value="3" id="ng" name="loan_status">
+											<button class="btn btn-secondary" type="submit" value="3" id="loan_status" name="loan_status">
 												NG
 											</button>
-										</div>
-									@elseif($val['loan_status'] == 1)
-										<div class="btn-group btn-group-sm" role="group">
-											<button class="btn btn-secondary" type="submit" value="2" id="ok" name="loan_status"  disabled="disabled">
+										@elseif($val['loan_status'] == 1)
+											<button class="btn btn-secondary" type="submit" value="2" id="loan_status" name="loan_status"  disabled="disabled">
 												OK
 											</button>
-											<button class="btn btn-secondary" type="submit" value="3" id="ng" name="loan_status" disabled="disabled">
+											<button class="btn btn-secondary" type="submit" value="3" id="loan_status" name="loan_status" disabled="disabled">
 												NG
 											</button>
-										</div>
-									@elseif($val['loan_status'] == 2)
-										<div class="btn-group btn-group-sm" role="group">
-											<button class="btn btn-secondary active" type="submit" value="2" id="ok" name="loan_status">
+										@elseif($val['loan_status'] == 2)
+											<button class="btn btn-secondary active" type="submit" value="2" id="loan_status" name="loan_status">
 												OK
 											</button>
-											<button class="btn btn-secondary" type="submit" value="3" id="ng" name="loan_status">
+											<button class="btn btn-secondary" type="submit" value="3" id="loan_status" name="loan_status">
 												NG
 											</button>
-										</div>
-									@elseif($val['loan_status'] == 3)
-										<div class="btn-group btn-group-sm" role="group">
-											<button class="btn btn-secondary" type="submit" value="2" id="ok" name="loan_status">
+										@elseif($val['loan_status'] == 3)
+											<button class="btn btn-secondary" type="submit" value="2" id="loan_status" name="loan_status">
 												OK
 											</button>
-											<button class="btn btn-secondary active" type="submit" value="3" id="ng" name="loan_status">
+											<button class="btn btn-secondary active" type="submit" value="3" id="loan_status" name="loan_status">
 												NG
 											</button>
-										</div>
-									@endif
-								</form>
+										@endif
+									</form>
+								</div>
 							</td>
 							<td>
 								<form action="" method="post">
-									@if($val['loan_status'] == 0 || $val['loan_status'] == 3)
+									@if($val['loan_status'] == 0)
 										返却済
-									@elseif($val['loan_status'] == 1 || $val['loan_status'] == 2)
+									@elseif($val['loan_status'] == 1)
 										貸出中
+									@elseif($val['loan_status'] == 2)
+										貸出許可
+									@elseif($val['loan_status'] == 3)
+										貸出NG
 									@endif
 								</form>
 							</td>
