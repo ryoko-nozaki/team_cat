@@ -17,7 +17,7 @@
                             <div class="col-md-6">
                                 <input id="isbn" type="text" class="form-control" name="isbn" value="{{ old('isbn') }}" required autofocus>
                             </div>
-                            <button type="submit" class="btn btn-default">
+                            <button type="button" id="search_book" class="btn btn-default">
                                 {{ __('検索') }}
                             </button>
                         </div>

@@ -19,6 +19,7 @@ Route::post('/book/createReview', 'BookDetailsInfoController@createReview');
 Route::post('/book/removeReview', 'BookDetailsInfoController@removeReview');
 Route::get('/bookRegist', 'BookRegistrationController@show');
 Route::post('/bookRegist', 'BookRegistrationController@create')->name('bookRegist');
+Route::get('/searchBook', 'BookSearchController@show');
 
 
 Auth::routes();
