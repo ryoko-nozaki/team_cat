@@ -27,18 +27,23 @@ class LoanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $loan_status = $request->input('loan_status');
+        if(isset($loan_status)){
+            $book_owner_id = $request->input('book_owner_id');
+            $this->permission($book_owner_id, $loan_status);
+        }
+        
         $user = Auth::user();
         
         $loan = \DB::table('loan')
-               ->select('loan.*', 'books.title as title', 'users.name as borrower_name', 'book_owner.loan_status')
+               ->select('loan.*', 'books.title as title', 'users.name as borrower_name', 'book_owner.loan_status', 'book_owner.id as book_owner_id')
                ->leftjoin('books','loan.book_id','=','books.id')
                ->leftjoin('users','loan.borrower_id','=','users.id')
-               // ->leftjoin('book_owner','loan.owner_id','=','book_owner.owner_id')
                ->leftjoin('book_owner',function($join){
                  $join->on('loan.owner_id','=','book_owner.owner_id')
-                 ->where('book_owner.book_id', '=', 'books.id');
+                 ->on('book_owner.book_id', '=', 'books.id');
                })
                ->where('loan.owner_id', $user['id'])
                ->orderBy('loan.id')
@@ -55,4 +60,13 @@ class LoanController extends Controller
         }
         return view('loan', $data);
     }
+
+    public function permission($book_owner_id, $loan_status)
+    {        
+        DB::table('book_owner')
+            ->where('id', $book_owner_id)
+            ->update(['loan_status' => $loan_status]);
+    }
 }
+
+
