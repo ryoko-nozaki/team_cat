@@ -1,0 +1,12 @@
+div.odd {
+  background-color: #ffffee;
+}
+
+div.even {
+  background-color: #eeeeee;
+}
+
+img {
+  max-width: 100%;
+  height: 200px;
+}

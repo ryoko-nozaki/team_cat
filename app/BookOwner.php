@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class BookOwner extends Model
 {
-    /**
-     * モデルと関係しているテーブル
-     *
-     * @var string
-     */
     protected $table = 'book_owner';
-    protected $guarded = array('id');
+    protected $primaryKey = 'id';
+
+    public function books() {
+
+        return $this->belongsTo('App\Books', 'book_id');
+
+    }
 
     public function user()
     {
