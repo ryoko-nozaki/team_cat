@@ -15,11 +15,13 @@
     <div class="row mt-5">
     @foreach($books as $book)
         <div class="col-4 pt-4">
+            <a href="/book/{{ $book->id }}">
             @if($book->thumbnail)
                 <img class="mx-auto d-block" src="{{ $book->thumbnail }}" />
             @else
                 <img class="mx-auto d-block" src="/img/no_img.png" />
             @endif
+            </a>
 
             <div class="mt-5">タイトル：{{ $book->title }}</div>
 
