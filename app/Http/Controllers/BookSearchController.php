@@ -19,10 +19,18 @@ class BookSearchController extends Controller
         $res = curl_exec($ch);
         curl_close($ch);
         $res = json_decode($res, true);
-        var_dump($res);
+        if ($res['totalItems'] == 0) {
+            $json = ['status' => 'false'];
+        } else {
+            $json = [
+                'status' => 'true',
+                'title' => $res['items'][0]['volumeInfo']['title'],
+                'author' => $res['items'][0]['volumeInfo']['authors'][0],
+                'description' => $res['items'][0]['volumeInfo']['description'],
+                'thumbnail' => $res['items'][0]['volumeInfo']['imageLinks']['thumbnail']
+            ];
+        }
 
-        return response()->json(
-            'test'
-        );
+        return response()->json($json);
     }
 }

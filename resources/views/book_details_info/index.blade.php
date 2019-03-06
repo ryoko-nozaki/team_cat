@@ -12,9 +12,11 @@
                     <label for="number" class="control-label col-xs-2">所持者</label>
                     <div class="col-sm-4">
                         <select class="form-control" id="number" name="number">
-                            @foreach ($owners as $owner)
-                                <option value="{{$owner->id}}">{{$owner->user->name}}</option>
-                            @endforeach
+                            @if (count($owners) > 0)
+                                @foreach ($owners as $owner)
+                                    <option value="{{$owner->id}}">{{$owner->user->name}}</option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                 </div>
@@ -47,28 +49,30 @@
                             <button type="submit" class="btn btn-primary">登録</button>
                         </form>
                     </div>
-                    @foreach ($reviews as $review)
-                        <div class="card">
-                            <h5 class="card-header">
-                                {{$review->user->name}}
-                            </h5>
-                            <div class="card-body">
-                                <p class="card-text">
-                                    {{$review->review}}
-                                </p>
-                            </div>
-                            @if ($userId == $review->reviewer_id)
-                                <div class="card-footer">
-                                    <form action="/book/removeReview" method="post">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" name="review_id" value="{{$review->id}}">
-                                        <input type="hidden" name="book_id" value="{{$book->id}}">
-                                        <button type="submit" class="btn btn-primary">削除</button>
-                                    </form>
+                    @if (count($reviews) > 0)
+                        @foreach ($reviews as $review)
+                            <div class="card">
+                                <h5 class="card-header">
+                                    {{$review->user->name}}
+                                </h5>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        {{$review->review}}
+                                    </p>
                                 </div>
-                            @endif
-                        </div>
-                    @endforeach
+                                @if ($userId == $review->reviewer_id)
+                                    <div class="card-footer">
+                                        <form action="/book/removeReview" method="post">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="review_id" value="{{$review->id}}">
+                                            <input type="hidden" name="book_id" value="{{$book->id}}">
+                                            <button type="submit" class="btn btn-primary">削除</button>
+                                        </form>
+                                    </div>
+                                @endif
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>

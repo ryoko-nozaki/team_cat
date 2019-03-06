@@ -8,8 +8,10 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
+                      <img alt="thumbnail" id="thumbnail_img" class="img-thumbnail mx-auto d-block" src="{{ asset('/img/noimage.png') }}">
                     <form method="POST" action="{{ route('bookRegist') }}" aria-label="{{ __('Register') }}">
                         @csrf
+                        <input id="thumbnail" type="hidden" class="form-control" name="thumbnail" value="{{ old('thumbnail') }}">
 
                         <div class="form-group row">
                             <label for="isbn" class="col-md-4 col-form-label text-md-right">{{ __('isbn') }}</label>
@@ -35,6 +37,14 @@
 
                             <div class="col-md-6">
                                 <input id="author" type="text" class="form-control" name="author" value="{{ old('author') }}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('詳細') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea id="description" class="form-control" name="description">{{ old('description') }}</textarea>
                             </div>
                         </div>
 
