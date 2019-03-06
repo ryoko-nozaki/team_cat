@@ -31,8 +31,17 @@ class LoanController extends Controller
     {
         $loan_status = $request->input('loan_status');
         if(isset($loan_status)){
+            if($loan_status == "OK"){
+                $loan_status = 2;
+            } else {
+                $loan_status = 3;
+            }
             $book_owner_id = $request->input('book_owner_id');
-            $this->permission($book_owner_id, $loan_status);
+            $loan_date = $request->input('loan_date');
+            $return_date = $request->input('return_date');
+            $loan_id = $request->input('loan_id');
+            $date = ['loan_date' => $loan_date, 'return_date' => $return_date, 'loan_id' => $loan_id];
+            $this->permission($book_owner_id, $loan_status, $date);
         }
         
         $user = Auth::user();
@@ -53,19 +62,23 @@ class LoanController extends Controller
         foreach($loan as $key => $val)
         {
             $val['title'] = mb_strimwidth($val['title'], 0, 20, "...");
-            $val['loan_date'] = mb_substr($val['loan_date'],0,4)."/".substr($val['loan_date'],5,2)."/".substr($val['loan_date'],8,2);
-            $val['return_date'] = mb_substr($val['return_date'],0,4)."/".substr($val['return_date'],5,2)."/".substr($val['return_date'],8,2);
+            $val['loan_date'] = mb_substr($val['loan_date'],0,4)."-".substr($val['loan_date'],5,2)."-".substr($val['loan_date'],8,2);
+            $val['return_date'] = mb_substr($val['return_date'],0,4)."-".substr($val['return_date'],5,2)."-".substr($val['return_date'],8,2);
             
             $data['loan'][] = $val;
         }
         return view('loan', $data);
     }
 
-    public function permission($book_owner_id, $loan_status)
-    {        
+    public function permission($book_owner_id, $loan_status, $date)
+    {
         DB::table('book_owner')
             ->where('id', $book_owner_id)
             ->update(['loan_status' => $loan_status]);
+        
+        DB::table('loan')
+            ->where('id', $date['loan_id'])
+            ->update(['loan_date' => $date['loan_date'], 'return_date' => $date['return_date']]);
     }
 }
 
