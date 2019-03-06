@@ -8,6 +8,8 @@
                 <img alt="thumbnail" src="{{$book->thumbnail}}" class="img-thumbnail"  width="50%" height="50%"/>
             </div>
             <form>
+            <form role="form" action="/book/applyLoan" method="post">
+                {{ csrf_field() }}
                 <div classnm="form-group center-block">
                     <label for="number" class="control-label col-xs-2">所持者</label>
                     <div class="col-sm-4">
@@ -20,11 +22,20 @@
                         </select>
                     </div>
                 </div>
+                <div classnm="form-group center-block">
+                    <div class="col-md-8 input-daterange input-group">
+                        <input type="date" class="input-sm form-control" id="loan_date" name="loan_date" value=""/>
+                        <span class="input-group-addon">～</span>
+                        <input type="date" class="input-sm form-control" id="return_date" name="return_date" value=""/>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-xs-10">
                         <button type="submit" class="btn btn-primary">貸出申請</button>
                     </div>
                 </div>
+            </form>
+            <form>
                 <div class="form-group">
                     <div class="col-xs-10">
                         <button type="submit" class="btn btn-primary">所持登録</button>

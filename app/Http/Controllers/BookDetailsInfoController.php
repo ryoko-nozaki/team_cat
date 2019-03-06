@@ -41,4 +41,9 @@ class BookDetailsInfoController extends Controller
 
         return redirect()->route('book', ['bookId' => $request->book_id]);
     }
+
+    public function applyLoan(Request $request)
+    {
+        
+    }
 }
