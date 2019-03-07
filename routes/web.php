@@ -21,8 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/loan', 'LoanController@index')->name('loan');
 Route::post('/loan', 'LoanController@index')->name('loan');
-Route::get('/mypage', 'mypageController@index')->name('mypage');
-Route::post('/mypage', 'mypageController@index')->name('mypage');
+Route::get('/mypage', 'MypageController@index')->name('mypage');
+Route::post('/mypage', 'MypageController@index')->name('mypage');
 
 Route::get('/', 'SearchController@index')->middleware('auth');
 Route::get('/search', 'SearchController@index')->middleware('auth');

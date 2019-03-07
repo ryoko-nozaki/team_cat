@@ -12,10 +12,6 @@ class ApplyingController extends Controller
     {
         $user = Auth::user();
         $loans = Loan::where("borrower_id", $user->id)->get();
-        // foreach ($loans as $loan) {
-        //     dump($loan->status);
-        // }
-        // exit;
         return view('applying')->with('loans', $loans);
     }
 }
