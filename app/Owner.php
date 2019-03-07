@@ -4,11 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BookOwner extends Model
+class Owner extends Model
 {
-    protected $table = 'book_owner';
-
-    public function books()
+    public function owner()
     {
         return $this->belongsTo('App\Books', 'book_id');
     }

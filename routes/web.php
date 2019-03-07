@@ -25,4 +25,5 @@ Route::get('/mypage', 'mypageController@index')->name('mypage');
 Route::post('/mypage', 'mypageController@index')->name('mypage');
 
 Route::get('/', 'SearchController@index')->middleware('auth');
-Route::get('search', 'SearchController@index')->middleware('auth');
+Route::get('/search', 'SearchController@index')->middleware('auth');
+Route::get('/applying', 'ApplyingController@index')->middleware('auth')->name('applying');
