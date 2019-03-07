@@ -23,7 +23,9 @@ class BookRegistrationController extends Controller
         $book->fill([
             'title' => $form['title'],
             'isbn' => $form['isbn'],
-            'author' => $form['author']
+            'author' => $form['author'],
+            'description' => $form['description'],
+            'thumbnail' => $form['thumbnail']
         ])->save();
         $bookOwner->fill([
             'book_id' => $book->id,
