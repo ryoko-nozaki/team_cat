@@ -6,7 +6,7 @@
 		<div class="col-md-2">
 			<ul class="nav flex-column text-center">
 				<li class="nav-item">
-					<a class="nav-link" href="#">書籍登録</a>
+					<a class="nav-link" href="/bookRegist">書籍登録</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="{{ route('loan') }}">貸出許可</a>

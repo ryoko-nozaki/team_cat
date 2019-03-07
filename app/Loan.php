@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Loan extends Model
 {
     protected $table = 'loan';
+    protected $guarded = ['id'];
     protected $primaryKey = 'book_id';
 
     public function book() {

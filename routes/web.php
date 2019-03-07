@@ -26,3 +26,12 @@ Route::post('/mypage', 'mypageController@index')->name('mypage');
 
 Route::get('/', 'SearchController@index')->middleware('auth');
 Route::get('search', 'SearchController@index')->middleware('auth');
+
+Route::get('/book/{bookId?}', 'BookDetailsInfoController@index')->name('book');
+Route::post('/book/createReview', 'BookDetailsInfoController@createReview');
+Route::post('/book/removeReview', 'BookDetailsInfoController@removeReview');
+Route::post('/book/applyLoan', 'BookDetailsInfoController@applyLoan');
+Route::post('/book/applyPosession', 'BookDetailsInfoController@applyPosession');
+Route::get('/bookRegist', 'BookRegistrationController@show');
+Route::post('/bookRegist', 'BookRegistrationController@create')->name('bookRegist');
+Route::get('/searchBook', 'BookSearchController@show');
