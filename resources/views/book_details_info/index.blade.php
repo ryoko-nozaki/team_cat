@@ -7,13 +7,13 @@
             <div align="center">
                 <img alt="thumbnail" src="{{$book->thumbnail}}" class="img-thumbnail"  width="50%" height="50%"/>
             </div>
-            <form>
             <form role="form" action="/book/applyLoan" method="post">
                 {{ csrf_field() }}
+                <input type="hidden" name="book_id" value="{{$book->id}}">
                 <div classnm="form-group center-block">
-                    <label for="number" class="control-label col-xs-2">所持者</label>
+                    <label for="owner_id" class="control-label col-xs-2">所持者</label>
                     <div class="col-sm-4">
-                        <select class="form-control" id="number" name="number">
+                        <select class="form-control" name="owner_id">
                             @if (count($owners) > 0)
                                 @foreach ($owners as $owner)
                                     <option value="{{$owner->id}}">{{$owner->user->name}}</option>
@@ -31,17 +31,25 @@
                 </div>
                 <div class="form-group">
                     <div class="col-xs-10">
-                        <button type="submit" class="btn btn-primary">貸出申請</button>
+                        @if ($loan_flg > 0)
+                            <button type="submit" class="btn btn-primary" disabled='disabled'>貸出申請</button>
+                        @else
+                            <button type="submit" class="btn btn-primary">貸出申請</button>
+                        @endif
                     </div>
                 </div>
             </form>
-            <form>
+            @if ($posession_flg == 0)
+            <form role="form" action="/book/applyPosession" method="post">
+                {{ csrf_field() }}
+                <input type="hidden" name="book_id" value="{{$book->id}}">
                 <div class="form-group">
                     <div class="col-xs-10">
                         <button type="submit" class="btn btn-primary">所持登録</button>
                     </div>
                 </div>
             </form>
+            @endif
         </div>
         <div class="col-md-6">
             <h3 class="text-center">{{$book->title}}</h3>
