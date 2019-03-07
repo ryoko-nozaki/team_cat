@@ -1,13 +1,13 @@
 <div class="col-md-2">
     <ul class="nav flex-column text-center">
         <li class="nav-item">
-            <a class="nav-link" href="#">書籍登録</a>
+            <a class="nav-link" href="{{ route('mypage') }}">所持一覧</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('loan') }}">貸出許可</a>
-		</li>
+        </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('applying') }}">申請中</a>
-		</li>
-	</ul>
+        </li>
+    </ul>
 </div>

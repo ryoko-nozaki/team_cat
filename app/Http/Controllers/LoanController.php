@@ -27,56 +27,43 @@ class LoanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $loan_status = $request->input('loan_status');
-        if (isset($loan_status)) {
-            if ($loan_status == "OK") {
-                $loan_status = 2;
-            } else {
-                $loan_status = 3;
-            }
-            $book_owner_id = $request->input('book_owner_id');
-            $loan_date = $request->input('loan_date');
-            $return_date = $request->input('return_date');
-            $loan_id = $request->input('loan_id');
-            $date = ['loan_date' => $loan_date, 'return_date' => $return_date, 'loan_id' => $loan_id];
-            $this->permission($book_owner_id, $loan_status, $date);
-        }
-
         $user = Auth::user();
-
-        $loan = \DB::table('loan')
-               ->select('loan.*', 'books.title as title', 'users.name as borrower_name', 'book_owner.loan_status', 'book_owner.id as book_owner_id')
-               ->leftjoin('books', 'loan.book_id', '=', 'books.id')
-               ->leftjoin('users', 'loan.borrower_id', '=', 'users.id')
-               ->leftjoin('book_owner', function ($join) {
-                   $join->on('loan.owner_id', '=', 'book_owner.owner_id')
-                 ->on('book_owner.book_id', '=', 'books.id');
-               })
-               ->where('loan.owner_id', $user['id'])
-               ->orderBy('loan.id')
-               ->get();
-        $loan = json_decode(json_encode($loan), true);
-
-        foreach ($loan as $key => $val) {
-            $val['title'] = mb_strimwidth($val['title'], 0, 20, "...");
-            $val['loan_date'] = mb_substr($val['loan_date'], 0, 4)."-".substr($val['loan_date'], 5, 2)."-".substr($val['loan_date'], 8, 2);
-            $val['return_date'] = mb_substr($val['return_date'], 0, 4)."-".substr($val['return_date'], 5, 2)."-".substr($val['return_date'], 8, 2);
-
-            $data['loan'][] = $val;
-        }
-        return view('loan', $data);
+        $apply_list = Loan::where('owner_id', $user->id)->get();
+        return view('loan')->with('apply_list', $apply_list);
     }
 
-    public function permission($book_owner_id, $loan_status, $date)
+    public function register(Request $request)
     {
-        DB::table('book_owner')
-            ->where('id', $book_owner_id)
-            ->update(['loan_status' => $loan_status]);
+        if ($request->has('loan_status')) {
+            $this->saveLoanStatus($request->input('id'), $request->input('loan_status'));
+        } elseif ($request->has('return_status')) {
+            $this->saveReturnStatus($request->input('id'), $request->input('return_status'));
+        }
 
-        DB::table('loan')
-            ->where('id', $date['loan_id'])
-            ->update(['loan_date' => $date['loan_date'], 'return_date' => $date['return_date']]);
+        return $this->index();
+    }
+
+    private function saveLoanStatus($id, $status)
+    {
+        if ($status === 'OK') {
+            $status = 1;
+        } elseif ($status === 'NG') {
+            $status = 2;
+        } else {
+            $status = 0;
+        }
+
+        $fetch_entity = Loan::find($id);
+        $fetch_entity->status = $status;
+        $fetch_entity->save();
+    }
+
+    private function saveReturnStatus($id, $status)
+    {
+        $fetch_entity = Loan::find($id);
+        $fetch_entity->return_o = $status;
+        $fetch_entity->save();
     }
 }

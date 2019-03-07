@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container-fluid">
-	<div class="row">
-		@include('sidebar')
-		<div class="col-md-9">
+    <div class="row">
+        @include('sidebar')
+        <div class="col-md-9">
             <h3>申請中一覧</h3>
             <table class="table table-striped  table-hover" style="background-color:#FFFFFF">
                 <thead>
@@ -23,7 +23,21 @@
                         <td>{{ $loan->user->name }}</td>
                         <td>{{ $loan->fetchDate() }}</td>
                         <td>{{ $loan->fetchStatus() }}</td>
-                        <td>d</td>
+                        <td>
+                            @if($loan->fetchStatus() === "OK")
+                                @if($loan->return_a === 0)
+                                    <form action="/applying" method="POST">
+                                        {{ csrf_field() }}
+                                        <button class="btn btn-primary" type="submit" value="1" name="return_status">返却</button>
+                                        <input type="hidden" name="id" value="{{ $loan->id }}" />
+                                </form>
+                                @elseif($loan->return_o === 0)
+                                    <div>返却確認中</div>
+                                @elseif($loan->return_o === 1)
+                                    <div>返却済み</div>
+                                @endif
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

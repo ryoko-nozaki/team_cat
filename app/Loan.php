@@ -13,6 +13,11 @@ class Loan extends Model
         return $this->belongsTo('App\User', 'owner_id');
     }
 
+    public function borrower()
+    {
+        return $this->belongsTo('App\User', 'borrower_id');
+    }
+
     public function book()
     {
         return $this->belongsTo('App\Books', 'book_id');
@@ -35,9 +40,5 @@ class Loan extends Model
         } elseif ($status === 2) {
             return "NG";
         }
-    }
-
-    public function fetchReturn()
-    {
     }
 }
