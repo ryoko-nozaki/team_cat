@@ -58,6 +58,14 @@ class LoanController extends Controller
         $fetch_entity = Loan::find($id);
         $fetch_entity->status = $status;
         $fetch_entity->save();
+
+        if ($status === 1) {
+            $owner = BookOwner::where('owner_id', $fetch_entity->owner_id)
+                ->where('book_id', $fetch_entity->book_id)
+                ->first();
+            $owner->loan_status = 1;
+            $owner->save();
+        }
     }
 
     private function saveReturnStatus($id, $status)
@@ -65,5 +73,11 @@ class LoanController extends Controller
         $fetch_entity = Loan::find($id);
         $fetch_entity->return_o = $status;
         $fetch_entity->save();
+
+        $owner = BookOwner::where('owner_id', $fetch_entity->owner_id)
+            ->where('book_id', $fetch_entity->book_id)
+            ->first();
+        $owner->loan_status = 0;
+        $owner->save();
     }
 }
