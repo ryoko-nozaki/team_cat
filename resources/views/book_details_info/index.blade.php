@@ -24,9 +24,9 @@
                 </div>
                 <div classnm="form-group center-block">
                     <div class="col-md-8 input-daterange input-group">
-                        <input type="date" class="input-sm form-control" id="loan_date" name="loan_date" value=""/>
+                        <input type="date" class="input-sm" id="loan_date" name="loan_date" value=""/>
                         <span class="input-group-addon">　～　</span>
-                        <input type="date" class="input-sm form-control" id="return_date" name="return_date" value=""/>
+                        <input type="date" class="input-sm" id="return_date" name="return_date" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
