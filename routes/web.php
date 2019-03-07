@@ -13,6 +13,8 @@
 
 Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/loan', 'LoanController@index')->name('loan');
 Route::post('/loan', 'LoanController@register')->name('loan');
 Route::get('/mypage', 'MypageController@index')->name('mypage');
