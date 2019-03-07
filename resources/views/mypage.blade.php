@@ -5,9 +5,6 @@
 	<div class="row">
 		@include('sidebar')
 		<div class="col-md-9">
-			<div class="alert alert-secondary" role="alert">
-				<strong>お知らせ</strong></br>書籍を貸し出しました。
-			</div>
 			<h3>
 				所持書籍一覧
 			</h3>
