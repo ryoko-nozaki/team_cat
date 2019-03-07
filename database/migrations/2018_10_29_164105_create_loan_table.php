@@ -20,6 +20,9 @@ class CreateLoanTable extends Migration
             $table->integer('book_id');
             $table->dateTime('loan_date')->nullable();
             $table->dateTime('return_date')->nullable();
+            $table->integer('status')->default(0);
+            $table->integer('return_a')->default(0);
+            $table->integer('return_o')->default(0);
             $table->dateTime('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->dateTime('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
