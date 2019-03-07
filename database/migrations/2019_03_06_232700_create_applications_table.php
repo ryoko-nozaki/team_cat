@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLoanTable extends Migration
+class CreateApplicationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateLoanTable extends Migration
      */
     public function up()
     {
-        Schema::create('loan', function (Blueprint $table) {
+        Schema::create('applications', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('borrower_id');
+            $table->integer('user_id');
             $table->integer('owner_id');
-            $table->integer('book_id');
+            $table->integer('status')->default(0);
             $table->dateTime('loan_date')->nullable();
             $table->dateTime('return_date')->nullable();
-            $table->integer('status')->default(0);
             $table->integer('return_a')->default(0);
             $table->integer('return_o')->default(0);
             $table->dateTime('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
@@ -35,6 +34,6 @@ class CreateLoanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('loan');
+        Schema::dropIfExists('applications');
     }
 }
