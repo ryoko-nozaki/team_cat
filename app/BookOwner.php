@@ -12,4 +12,9 @@ class BookOwner extends Model
     {
         return $this->belongsTo('App\Books', 'book_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'owner_id');
+    }
 }

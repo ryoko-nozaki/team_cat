@@ -19,6 +19,7 @@ class CreateBooksTable extends Migration
             $table->char('title', 255);
             $table->char('author', 255)->nullable();
             $table->char('thumbnail', 255)->nullable();
+            $table->char('description', 255)->nullable();
             $table->dateTime('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->dateTime('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
