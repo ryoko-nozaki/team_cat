@@ -16,7 +16,7 @@
                         <select class="form-control" name="owner_id">
                             @if (count($owners) > 0)
                                 @foreach ($owners as $owner)
-                                    <option value="{{$owner->id}}">{{$owner->user->name}}</option>
+                                    <option value="{{$owner->owner_id}}">{{$owner->user->name}}</option>
                                 @endforeach
                             @endif
                         </select>

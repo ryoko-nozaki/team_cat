@@ -55,7 +55,6 @@ class BookDetailsInfoController extends Controller
     public function applyLoan(Request $request)
     {
         $loan = new Loan;
-        $form = $request->all();
         $loan->fill([
             'borrower_id' => Auth::id(),
             'owner_id' => $request->owner_id,
